@@ -51,6 +51,38 @@ app.get("/subscribers/:id", async (req, res) => {
   }
 });
 
+/ request for updating data by id
+
+app.patch("/subscribers/:id",async(req,res)=>{
+  try {
+    const _id=req.params.id;
+    const updatedData=await Subscriber.findByIdAndUpdat(_id,req.body,{new: true});
+    res.send(updatedData)
+  } catch (e) {
+    res.status(404).send(e);
+    
+  }
+})
+
+// request for deleting data by Id
+
+app.delete("/subscribers/:id",async(req,res)=>{
+  try {
+    const _id=req.params.id;
+    const deletedData=await Subscriber.findByIdAndUpdat(_id);
+    if(!_id)
+    {
+     return res.status(400).send("Client Error")
+    }
+
+    res.send(deletedData)
+  } catch (e) {
+    res.status(404).send(e);
+    
+  }
+})
+
+
 
 
 module.exports = app;
