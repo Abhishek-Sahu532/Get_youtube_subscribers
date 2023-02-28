@@ -51,7 +51,7 @@ app.get("/subscribers/:id", async (req, res) => {
   }
 });
 
-/ request for updating data by id
+// request for updating data by id
 
 app.patch("/subscribers/:id",async(req,res)=>{
   try {
