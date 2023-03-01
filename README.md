@@ -1,15 +1,41 @@
-Project Title - Get YouTube Subscribers
+# Project Title - Get YouTube Subscribers
+
+By the specific routes in the URL, an user can access the number of subscribers, add subscribers or access subscribers by specific IDs and names, he or she can update and delete as well.
+
+### Technology Used
+- NodeJS
+- Express
+- MongoDB
+- MongoDB Atlas
+- Mongoose
+
+## Features
+
+- Fetch specific data from database via a route
+- Adding new subscribers to database
+- Updating existing subscribers present in the database
+- Deleting subscribers from the database
 
 
-Technology used - NodeJS, MongoDB, Express, Mongoose, MongoDB Atlas.
 
-This backend project was developed using the above techology.
+Useful Links
 
-By accessing specific routes in the URL, users can interact with the database to retrieve the number of subscribers, add new subscribers, access subscribers by their specific IDs and names, update subscriber information, and delete subscribers. The functionality of the project was tested using Postman, and it was found to be working perfectly, with all routes functioning as intended.
+```sh
+http://localhost:3000/subscribers
+```
+> Using the above route user can see the full list of the subscribers.
+
+```sh
+http://localhost:3000/subscribers/names
+```
+> Using the above route You can see the full list of the subscribers with only "name" and "subscribedChannel".
+
+```sh
+http://localhost:3000/subscribers/<id>
+```
+> Using the above route you can see the details of the ojbect of the given particular object id.
 
 
-http://localhost:3000/subscribers - Using this route You can see the full list of the subscribers.
+Deployed Link :
 
-http://localhost:3000/subscribers/names - Using this route You can see the full list of the subscribers with only "name" and "subscribedChannel.
-
-http://localhost:3000/subscribers/<id> - Using this route you can see the details of the ojbect of the given particular object id.
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
