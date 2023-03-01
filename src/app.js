@@ -1,4 +1,5 @@
 const express = require("express");
+const subscribers = require("./models/subscribers");
 const app = express();
 const Subscriber = require("./models/subscribers");
 
@@ -43,7 +44,7 @@ app.get("/subscribers/:id", async (req, res) => {
   try {
     const ListById = await Subscriber.findById(req.params.id, req.body);
     if (!ListById) {
-     return res.status(400).send(`message: error.message`);
+      return res.status(400).send(`message: error.message`);
     }
     res.send(ListById);
   } catch (error) {
@@ -51,38 +52,50 @@ app.get("/subscribers/:id", async (req, res) => {
   }
 });
 
-// request for updating data by id
+//reqeust for creating the new object & store in the database
 
-app.patch("/subscribers/:id",async(req,res)=>{
+app.post('/subscribers/add', async (req, res)=>{
+  const newSubscriber = await new Subscriber(req.body)
   try {
-    const _id=req.params.id;
-    const updatedData=await Subscriber.findByIdAndUpdat(_id,req.body,{new: true});
-    res.send(updatedData)
-  } catch (e) {
-    res.status(404).send(e);
-    
+   await newSubscriber.save();
+   res.send(newSubscriber)
+  
+  } catch (error) {
+  res.status(500).send(error)
+  console.log(error.message)  
   }
 })
+
+
+// request for updating data by id
+
+app.patch("/subscribers/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    await Subscriber.findOneAndUpdate(_id, req.body);
+    await subscribers.save();
+    res.send(Subscriber);
+  } catch (e) {
+    res.status(404).send(e);
+  }
+});
 
 // request for deleting data by Id
 
-app.delete("/subscribers/:id",async(req,res)=>{
+app.delete("/subscribers/:id", async (req, res) => {
   try {
-    const _id=req.params.id;
-    const deletedData=await Subscriber.findByIdAndUpdat(_id);
-    if(!_id)
-    {
-     return res.status(400).send("Client Error")
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).send("No Item Found");
     }
-
-    res.send(deletedData)
+    const updatedSubscribersList = await Subscriber.findOneAndDelete(
+      id,
+      req.body
+    );
+    res.send(updatedSubscribersList);
   } catch (e) {
-    res.status(404).send(e);
-    
+    res.status(500).send(e);
   }
-})
-
-
-
+});
 
 module.exports = app;
