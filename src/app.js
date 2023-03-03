@@ -20,7 +20,7 @@ app.get("/subscribers", async (req, res) => {
     res.status(200).send(ListOfSubscribers);
   } catch (error) {
     res.status(500).send(error);
-    console.log(error.message);
+    console.log(error);
   }
 });
 

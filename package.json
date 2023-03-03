@@ -1,21 +1,21 @@
 {
-  "name": "node-server-testing",
+  "name": "get-youtube-subscribers",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "engines": {
-    "node" : "14.x"
+    "node": "14.x"
   },
   "scripts": {
-    "test": "mocha '__tests__/*.js' --reporter mochawesome --recursive  --timeout 60000 --exit" ,
-    "start": "node index.js"
+ 
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "4.17.1",
     "mochawesome": "6.1.1",
-    "mongoose": "^5.10.15"
+    "mongoose": "^5.10.15",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
     "chai": "^4.3.7",
