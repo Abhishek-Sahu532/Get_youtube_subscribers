@@ -6,8 +6,8 @@ const Subscriber = require("./models/subscribers");
 // Your code goes here
 app.use(express.json());
 
-//Root node
 
+//Root node
 app.get("/", (req, res) => {
   res.send("Hi!, This is the first page for the backend project");
 });
@@ -20,7 +20,7 @@ app.get("/subscribers", async (req, res) => {
     res.status(200).send(ListOfSubscribers);
   } catch (error) {
     res.status(500).send(error);
-    console.log(error);
+    console.log(error.message);
   }
 });
 
@@ -54,25 +54,23 @@ app.get("/subscribers/:id", async (req, res) => {
 
 //reqeust for creating the new object & store in the database
 
-app.post('/subscribers/add', async (req, res)=>{
-  const newSubscriber = await new Subscriber(req.body)
+app.post("/subscribers/add", async (req, res) => {
+  const newSubscriber = await new Subscriber(req.body);
   try {
-   await newSubscriber.save();
-   res.send(newSubscriber)
-  
+    await newSubscriber.save();
+    res.send(newSubscriber);
   } catch (error) {
-  res.status(500).send(error)
-  console.log(error.message)  
+    res.status(500).send(error);
+    console.log(error.message);
   }
-})
-
+});
 
 // request for updating data by id
 
 app.patch("/subscribers/:id", async (req, res) => {
   try {
     const _id = req.params.id;
-    await Subscriber.findOneAndUpdate(_id, req.body);
+    await Subscriber.findByIdAndUpdate(_id, req.body);
     await subscribers.save();
     res.send(Subscriber);
   } catch (e) {
@@ -88,10 +86,7 @@ app.delete("/subscribers/:id", async (req, res) => {
     if (!id) {
       return res.status(400).send("No Item Found");
     }
-    const updatedSubscribersList = await Subscriber.findOneAndDelete(
-      id,
-      req.body
-    );
+    const updatedSubscribersList = await Subscriber.findByIdAndRemove(id, req.body);
     res.send(updatedSubscribersList);
   } catch (e) {
     res.status(500).send(e);
