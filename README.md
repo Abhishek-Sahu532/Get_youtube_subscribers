@@ -38,6 +38,6 @@ http://localhost:3000/subscribers/<id>
 
 Deployed Link :
 
-[![Build Status]https://get-youtube-subscribers-demo.vercel.app/)
+[![Build Status](https://get-youtube-subscribers-demo.vercel.app/)
 
 https://get-youtube-subscribers-demo.vercel.app/
